@@ -6,6 +6,7 @@ import Other from './components/screens/Other'
 import { NativeRouter, Route, Link } from 'react-router-native'
 import TakePics from './components/screens/TakePics'
 import Detect from './components/screens/Detect'
+import WriteNote from './components/screens/WriteNote'
 
 console.disableYellowBox = true;
 
@@ -56,12 +57,19 @@ export default class App extends React.Component {
             style={styles.navItem} >
               <Text>Topics</Text>
           </Link>
+          <Link
+            to="/writeNote"
+            underlayColor='#f0f4f7'
+            style={styles.navItem} >
+              <Text>Write Note</Text>
+          </Link>
         </View>
         
         <View style={styles.other}>
           <Route exact path="/" component={Detect}/>
           <Route path="/camera" component={TakePics}/>
           <Route path="/other" component={Other}/>
+          <Route path="/writeNote" component={WriteNote}/>
         </View>
       </View>
     </NativeRouter>

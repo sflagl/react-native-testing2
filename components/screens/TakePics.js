@@ -1,17 +1,22 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableHighlight, Alert } from 'react-native';
+import { Col, Row, Grid } from "react-native-easy-grid"
 import Camera from '../Camera'
 import PicsDisplay from '../PicsDisplay'
 import { Button } from 'react-native-elements'
+import {Redirect} from 'react-router-native'
+import WriteNote from './WriteNote'
 // create a component
 class TakePics extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          modalVisible: false,
-          pictures: [],
+            redirect: false,
+            note: '',
+            concept: '',
+            pictures: [],
         };
     }
 
@@ -43,17 +48,27 @@ class TakePics extends Component {
               ))
         }else{
             console.log('Going to screen...')
+            this.setState({redirect: true})
         }
     }
 
     render() {
+        if(this.state.redirect){
+            return <WriteNote pictures={this.state.pictures}/>
+        }
         return (
-            <View style={styles.container}>
-                <Camera style={styles.camera} addPics={this.addPics} />
-                <PicsDisplay style={styles.PicsDisplay} pictures={this.state.pictures} deletePics={this.deletePics} />
+            <Grid style={styles.container}>
+                <Row size={60}>
+                    <Camera style={styles.camera} addPics={this.addPics} />
+                </Row>
+                <Row size={20}>
+                    <PicsDisplay style={styles.PicsDisplay} pictures={this.state.pictures} deletePics={this.deletePics} />
+                </Row>
                 {/* <Text style={styles.button} title="Write Note">WRITE NOTE </Text> */}
-                <Button buttonStyle={styles.button} title="Write Note" onPress={this.goToWriteNoteScreen}/>
-            </View>
+                <Row styles={{alignItems: 'center'}} size={20}>
+                    <Button buttonStyle={styles.button} title="Write Note" onPress={this.goToWriteNoteScreen}/>
+                </Row>
+            </Grid>
         );
     }
 
@@ -65,8 +80,8 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         justifyContent: 'center',
-        // alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        alignItems: 'center',
+        backgroundColor: 'white',
         height: '90%',
         flexDirection: 'column',
         paddingBottom: '5%'
@@ -79,13 +94,13 @@ const styles = StyleSheet.create({
        
     }, 
     PicsDisplay: {
-        // flex: 2,
         backgroundColor: 'blue',
         // height: '25%'
         
     },
     button: {
-      width: '50%'
+      width: '100%',
+      justifyContent: 'center'
     }
 });
 

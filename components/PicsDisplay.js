@@ -25,9 +25,11 @@ const PicsDisplay = (props) => {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView} horizontal={true} >
             {
+                props.pictures ?
                 props.pictures.map((picture, ind) => {
                     return <Picture picture={picture} key={`picture-${ind}`} picKey={ind} alertFunc={this.alertFunc}/>
-                })
+                }) :
+                ('This is just a test so...')
             }
             </ScrollView>
         </View>
