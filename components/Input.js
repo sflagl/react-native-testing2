@@ -11,7 +11,7 @@ const Input = (props) => {
                 <Text>Object name:</Text>
             </Row>
             <Row>
-                <TextInput onChange={(text)=>{props.handleChange(text)}} value={props.concept} style={{backgroundColor: 'white', width: '75%', borderWidth: 3, borderColor: 'gray', paddingRight: 10, paddingLeft: 10}}>
+                <TextInput onChangeText={(text)=>{props.handleChange(text)}} value={props.concept} style={{backgroundColor: 'white', width: '75%', borderWidth: 3, borderColor: 'gray', paddingRight: 10, paddingLeft: 10}}>
                 </TextInput>
             </Row>
         </Grid>

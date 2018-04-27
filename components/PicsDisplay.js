@@ -6,8 +6,6 @@ import Picture from './Picture'
 
 // create a component
 const PicsDisplay = (props) => {
-    console.log('Pics Display')
-    console.log(props.pictures)
 
     alertFunc = (picKey) => {
         return (Alert.alert(

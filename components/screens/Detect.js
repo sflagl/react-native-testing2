@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import {Grid, Row} from 'react-native-easy-grid'
 import Camera from '../Camera'
 import { Button } from 'react-native-elements'
 
@@ -8,9 +9,13 @@ import { Button } from 'react-native-elements'
 class DetectNotes extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Camera style={styles.camera}/>
-            </View>
+            <Grid style={styles.container}>
+                <Row size={70}>
+                    <Camera/>
+                </Row>
+                <Row size={30}>
+                </Row>
+            </Grid>
         );
     }
 }
@@ -25,10 +30,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
 
-    camera: {
-        width: 300,
-        flex: 8
-    }
+    // camera: {
+    //     width: 300,
+    //     flex: 8
+    // }
 });
 
 //make this component available to the app

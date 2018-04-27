@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   }, 
   other :{
-    height: '100%',
+    height: '95%',
     flexDirection: 'column',
     overflow: "visible"
   }
