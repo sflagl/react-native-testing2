@@ -11,7 +11,7 @@ class DetectNotes extends Component {
         return (
             <Grid style={styles.container}>
                 <Row size={70}>
-                    <Camera/>
+                    <Camera use="detection"/>
                 </Row>
                 <Row size={30}>
                 </Row>

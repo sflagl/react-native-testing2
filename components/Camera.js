@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import Clarifai from '../utils/clarifai'
+import clarifai from '../utils/clarifai'
 
 class BadInstagramCloneApp extends Component {
 
@@ -47,11 +47,17 @@ class BadInstagramCloneApp extends Component {
   }
 
   takePicture = async function() {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
+    const {use} = this.props
+    const options = { quality: 0.5, base64: true };
+    if (this.camera && use === 'upload') {
       const data = await this.camera.takePictureAsync(options)
       console.log(data);
       this.props.addPics(data)
+    }else if(this.camera && use === 'detection'){
+      const data = await this.camera.takePictureAsync(options)
+      console.log('Detecting...')
+      const objects = await clarifai.predictContent('test-model', data.base64)
+      console.log(objects)
     }
   };
 

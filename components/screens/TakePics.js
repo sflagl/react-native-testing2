@@ -59,7 +59,7 @@ class TakePics extends Component {
         return (
             <Grid style={styles.container}>
                 <Row size={60}>
-                    <Camera style={styles.camera} addPics={this.addPics} />
+                    <Camera style={styles.camera} addPics={this.addPics} use="upload"/>
                 </Row>
                 <Row size={20}>
                     <PicsDisplay style={styles.PicsDisplay} pictures={this.state.pictures} deletePics={this.deletePics} />
