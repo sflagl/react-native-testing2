@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableHighlight, Alert } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid"
-import Camera from '../Camera'
+// import Camera from '../Camera'
+import Camera from '../ARKitCamera'
 import PicsDisplay from '../PicsDisplay'
 import { Button } from 'react-native-elements'
 import {Redirect} from 'react-router-native'

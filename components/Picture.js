@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 const Picture = (props) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => {props.alertFunc(props.picKey)}}>
-            <Image style={{height: '100%', zIndex: 1}} source={{uri: props.picture.uri}}/>
+            <Image style={{height: '100%', zIndex: 1}} source={{uri: props.picture.url}}/>
         </TouchableOpacity>
     );
 };

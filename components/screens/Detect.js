@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {Grid, Row} from 'react-native-easy-grid'
-import Camera from '../Camera'
+import Camera from '../ARKitCamera'
 import { Button } from 'react-native-elements'
 
 // create a component

@@ -66,7 +66,7 @@ export default class App extends React.Component {
         </View>
         
         <View style={styles.other}>
-          <Route exact path="/" component={Detect}/>
+          <Route exact path="/" component={Other}/>
           <Route path="/camera" component={TakePics}/>
           <Route path="/other" component={Other}/>
           <Route path="/writeNote" component={WriteNote}/>

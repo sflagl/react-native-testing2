@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>I&apos;m gonna add stuff to your pictures</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -65,6 +67,8 @@
 	<string>Let me get that camera?</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Let me track the shit out of you</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>I&apos;m creeping through your photos</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
