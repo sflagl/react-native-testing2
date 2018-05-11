@@ -1,57 +1,87 @@
+ 
 import React, { Component } from 'react';
-import { View, Text} from 'react-native';
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { Container, Button, Content} from 'native-base';
+import { Container, Header, Content, Form, Item, Input, Textarea } from 'native-base';
+import {Grid, Row, Col} from 'react-native-easy-grid'
+import PicsDisplay from '../comps/PicsDisplay'
+import Button from '../comps/button'
+import {TouchableWithoutFeedback, Keyboard, Text} from 'react-native'
 
-import HeaderComp from '../comps/header.js';
-import FooterComp from '../comps/footer.js';
-import Thumb from '../comps/thumbnail';
-import Cam from '../comps/camera';
-import ButtonOutline from '../comps/button-outline';
-import ButtonSolid from '../comps/button';
-import Camera from '../comps/ARKitCamera'
+export class AddNote extends Component {
+  constructor(props){
+    super(props)
 
+    this.state = {
+      note: [],
+      title: '',
+      pictures: this.props.navigation.state.params.pictures
+    }
+  }
 
-import { StackNavigator, NavigationActions, navigationOptions } from 'react-navigation';
+  submitNote = () => {
+    const {note, title, pictures} = this.state
+    //send pics to clarify
 
-export default class AddNote extends Component {
+    //add note and title to state
+
+    //redirect to homepage
+
+    console.log('Submitted!')
+    console.log(title)
+    console.log(note[0])
+    console.log(note[1])
+    console.log(note[2])
+    
+    this.props.navigation.navigate('StartViewScreen')
+  }
+
+  changeNote = (num, text) => {
+    const {note} = this.state
+    note[num] = text 
+    this.setState({note})
+
+    console.log(text)
+  }
 
   render() {
     return (
-      <Container style={{margin: 5}}>
-        
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
       <Grid>
-      <HeaderComp />
-   
-        <Row size={2} style={{backgroundColor:'blue', padding:5}}>
-         
+        <Row size={2}>
+          <Form style={{padding: 10, width: '100%'}}>
+            <Item rounded style={{marginBottom:20, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
+              <Input placeholder="Object Name" onChangeText={(text => this.setState({title: text}))}
+              value={this.state.title}/>
+            </Item>
+            <Text style={{marginBottom:10, paddingLeft:10}}> Note </Text>
+            <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
+              <Input placeholder="Line 1" onChangeText={(text) => this.changeNote(0, text)} value={this.state.note[0]}/>
+            </Item>
+            <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
+              <Input placeholder="Line 2" onChangeText={(text) => this.changeNote(1, text)} value={this.state.note[1]}/>
+            </Item>
+            <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
+              <Input placeholder="Line 3" onChangeText={(text) => this.changeNote(2, text)} value={this.state.note[2]}/>
+            </Item>
+          </Form>
         </Row>
-        <Row size={1} style={{ padding:5, margin: 5, justifyContent: 'center',
-        alignItems: 'center'}}>
-          <Col>
-            <Text>asdfghsb</Text>
-          </Col>   
-          <Col>
-            <Thumb/>
-          </Col>   
-          <Col>
-            <Thumb/>
-          </Col>   
-          <Col>
-            <Thumb/>
-          </Col>   
-        </Row>
+
         <Row size={1}>
-        <Col>
-              <ButtonOutline press={() => this.props.navigation.navigate('TakePicsScreen')} title="Take Pictures"/>   
-              <ButtonSolid title="Take Picture"/>    
-            </Col>
+          <PicsDisplay pictures={this.state.pictures}/>
         </Row>
 
+        <Row size={1}>
+          <Col>
+            <Button title="Submit Note" press={this.submitNote}/>
+          </Col>
+        </Row>
 
-        <FooterComp/>
-    </Grid>
-     </Container>
-    )
+      </Grid>
+      </TouchableWithoutFeedback>
+    
+    );
   }
 }
+
+
+export default AddNote;

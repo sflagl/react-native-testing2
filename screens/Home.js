@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Div, View, Text, StyleSheet, Button, ImageBackground} from 'react-native';
+import { Div, View, Text, StyleSheet, Button, ImageBackground, TouchableWithoutFeedback, Keyboard} from 'react-native';
 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Container, Content} from 'native-base';
@@ -23,7 +23,7 @@ export class Home extends Component {
 
     return (
 
-    
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Grid>
         <ImageBackground
           source={{ uri: 'https://images.unsplash.com/photo-1513909619904-efd11e5b8666?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c5c80f82f52136a57d191b2e081eb82c&auto=format&fit=crop&w=668&q=80' }}
@@ -59,6 +59,7 @@ export class Home extends Component {
 
         </ImageBackground>
       </Grid>
+    </TouchableWithoutFeedback>
   
 
 

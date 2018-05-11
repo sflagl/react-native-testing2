@@ -43,7 +43,7 @@ class TakePics extends Component {
     }
 
     goToWriteNoteScreen = () => {
-        if(this.state.pictures.length < 5){
+        if(this.state.pictures.length < -1){
             return (Alert.alert(
                 'More Pictures Needed!',
                 'You need to take at least 5 pictures before you can write a note',
@@ -54,7 +54,7 @@ class TakePics extends Component {
               ))
         }else{
             console.log('Going to screen...')
-            this.props.navigation.navigate('StartViewScreen')
+            this.props.navigation.navigate('AddNoteScreen', {pictures: this.state.pictures})
         }
     }
 
