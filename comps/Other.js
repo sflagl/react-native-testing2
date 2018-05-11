@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, TouchableWithoutFeedback } from 'react-native';
 import { ARKit } from 'react-native-arkit';
-import {Grid, Row} from 'react-native-easy-grid'
+import {Grid, Row} from 'react-native-easy-grid';
+import clarifai from '../utils/clarifai'
 
 const ReadImageData = require('NativeModules').ReadImageData;
 
@@ -12,7 +13,24 @@ export default class ReactNativeARKit extends Component {
   constructor(props) {
     super(props);
     this.state ={
-      showThatThing: false
+      showThatThing: false,
+      showNote: false,
+      noteObject: ''
+    }
+  }
+
+  showNote = (object) => {
+    if(concepts[0].value > 0.75){
+      this.setState({showNote: true, noteObject: concepts[0].name})
+    }else{
+
+    }
+  }
+
+  shouldITakePic = () => {
+    console.log('Touch me there')
+    if(this.props.use === 'detection'){
+      this.takePicture()
     }
   }
 
@@ -24,14 +42,29 @@ export default class ReactNativeARKit extends Component {
       console.log(data.url);
       ReadImageData.readImage(data.url, (imageBase64) => {
         console.log(imageBase64);
+        data.base64 = imageBase64
+        this.props.addPics(data)
         });
-      this.props.addPics(data)
     }else if(use === 'detection'){
       const data = await ARKit.snapshotCamera()
       console.log('Detecting...')
       ReadImageData.readImage(data.url, (imageBase64) => {
-        console.log(imageBase64);
-        const objects = clarifai.predictContent('test-model', imageBase64)
+        //call clarifai
+        clarifai.predictContent('test-model', imageBase64)
+          .then(
+            //Do something with response
+            function(response) {
+              console.log('Predicting...')
+              console.log(response.rawData.outputs[0].data)
+              return response.rawData.outputs[0].data
+            },
+            function(err) {
+              // there was an error
+              console.log(err)
+              console.log('Fuck')
+              return "No notes detected"
+            }
+          )
         });
     }
   };
@@ -53,6 +86,7 @@ export default class ReactNativeARKit extends Component {
   render() {
 
     return (
+      <TouchableWithoutFeedback onPress={this.shouldITakePic}>
       <Grid>
         <Row size={85}>
         <ARKit
@@ -143,6 +177,7 @@ export default class ReactNativeARKit extends Component {
         <Button title="Do something" onPress={this.renderLikeAnythingPlease}/>
         </Row>
       </Grid>
+      </TouchableWithoutFeedback>
     );
   }
 }

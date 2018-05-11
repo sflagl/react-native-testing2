@@ -43,7 +43,6 @@ class BadInstagramCloneApp extends Component {
 
   takePicture = async function() {
     const {use} = this.props
-    const options = { quality: 0.5, base64: true };
     console.log('Clicked!')
     if (use === 'upload') {
       const data = await ARKit.snapshotCamera()

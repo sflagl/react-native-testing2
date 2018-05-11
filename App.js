@@ -22,6 +22,8 @@ import GalleryOpen from './screens/GalleryOpen';
 import HeaderComp from './comps/header'
 import Icon from 'react-native-ionicons';
 
+import data from './data/Notes'
+
 // import objects from './data/Notes'
 
 
@@ -45,20 +47,21 @@ export default class App extends Component {
     super(props);
     this.state={
       test: "Just seeing if this shit works", 
+      objects: data
     }
   }
 
-  addNote = () => {
-
-  }
-
-  addPictures = () => {
-
+  addObjectToNotes = (obj) => {
+    const {objects} = this.state
+    console.log('Added!')
+    const newObjects = [...objects, obj]
+    console.log(newObjects)
+   
   }
 
   render() {
     return (
-      <AppNavigator screenProps={this.state}/>
+      <AppNavigator screenProps={{addObjectToNotes: this.addObjectToNotes, ...this.state}}/>
     );
   }
 }

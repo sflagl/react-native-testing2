@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "base64-img": "^1.0.4",
-    "clarifai": "^2.7.0",
+    "clarifai": "^2.7.1",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",
     "expo": "^26.0.0",

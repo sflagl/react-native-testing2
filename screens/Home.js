@@ -20,7 +20,7 @@ export class Home extends Component {
   };
 
   render() {
-
+    console.log(this.props.screenProps)
     return (
 
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

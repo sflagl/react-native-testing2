@@ -1,12 +1,16 @@
-[
+export default notes = [
     {
-        name: "Watter Bottle",
-        note:"",
+        name: "Watter Botte",
+        note:[
+
+        ],
         pictures: []
     },
     {
         name: "Almond butter",
-        note:"",
+        note:[
+
+        ],
         pictures: []
     },
     {

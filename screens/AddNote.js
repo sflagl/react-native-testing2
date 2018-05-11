@@ -5,6 +5,7 @@ import {Grid, Row, Col} from 'react-native-easy-grid'
 import PicsDisplay from '../comps/PicsDisplay'
 import Button from '../comps/button'
 import {TouchableWithoutFeedback, Keyboard, Text} from 'react-native'
+import clarifai from '../utils/clarifai'
 
 export class AddNote extends Component {
   constructor(props){
@@ -13,16 +14,23 @@ export class AddNote extends Component {
     this.state = {
       note: [],
       title: '',
-      pictures: this.props.navigation.state.params.pictures
+      pictures: this.props.navigation.state.params.pictures,
+      addObjectToNotes: this.props.screenProps.addObjectToNotes,
     }
   }
 
   submitNote = () => {
     const {note, title, pictures} = this.state
     //send pics to clarify
-
+    // clarifai.createImages(pictures, title, 'test-model')
     //add note and title to state
+    const newObj = {
+      name: title,
+      note: note,
+      pictures: pictures
+    }
 
+    this.state.addObjectToNotes(newObj)
     //redirect to homepage
 
     console.log('Submitted!')
