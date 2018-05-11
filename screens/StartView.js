@@ -21,32 +21,32 @@ import Add from '../screens/AddNote'
 import ARCamera from '../comps/Other'
 import Camera from '../comps/ARKitCamera'
 
-const provideIsFocused = Comp => {
-  class IsFocusedProvider extends React.Component {
-    state = {
-      isFocused: false,
-    };
+// const provideIsFocused = Comp => {
+//   class IsFocusedProvider extends React.Component {
+//     state = {
+//       isFocused: false,
+//     };
 
-    componentDidMount() {
-      this.subs = [
-        this.props.navigation.addListener("didFocus", () => this.setState({isFocused: true})),
-        this.props.navigation.addListener("willBlur", () => this.setState({isFocused: false})),
-      ];
-    }
+//     componentDidMount() {
+//       this.subs = [
+//         this.props.navigation.addListener("didFocus", () => this.setState({isFocused: true})),
+//         this.props.navigation.addListener("willBlur", () => this.setState({isFocused: false})),
+//       ];
+//     }
 
-    componentWillUnmount() {
-      this.subs.forEach(sub => sub.remove());
-    }
+//     componentWillUnmount() {
+//       this.subs.forEach(sub => sub.remove());
+//     }
 
-    render() {
-      return (
-        <Comp isFocused={this.state.isFocused} {...this.props}/>
-      )
-    }
-  }
+//     render() {
+//       return (
+//         <Comp isFocused={this.state.isFocused} {...this.props}/>
+//       )
+//     }
+//   }
 
-  return IsFocusedProvider;
-};
+//   return IsFocusedProvider;
+// };
 
 class StartView extends Component {
 
@@ -57,15 +57,10 @@ class StartView extends Component {
   }
 };
 
-componentDidBlur = () => {
-
-}
-
-
 
 render() {
   return (
-    <ARCamera/>
+    <ARCamera use="detection" getFunc={(func) => {console.log('Detecting...')}}/>
 
   );
 }
@@ -143,19 +138,19 @@ class AddNoteInstructions extends Component {
 
 export default TabNavigator({
   GalleryTest: { 
-    screen: provideIsFocused(GalleryTest),
+    screen: GalleryTest,
     navigationOptions: {
       tabBarLabel: (<Text style={{fontSize: 10, paddingBottom:5 }}>Gallery</Text>),
       tabBarIcon: (<Icon name='images' size={25} />),
     }, 
    },
-   StartView: { screen: provideIsFocused(StartView),
+   StartView: { screen: StartView,
     navigationOptions: {
       tabBarLabel: (<Text style={{fontSize: 10, paddingBottom:5 }}>Start View</Text>),
       tabBarIcon: (<Icon name='camera' size={25} />),
     }
    },
-   AddNote: { screen: provideIsFocused(AddNoteInstructions),
+   AddNote: { screen: AddNoteInstructions,
     navigationOptions: {
       tabBarLabel: (<Text style={{fontSize: 10, paddingBottom:5 }}>Add Note</Text>),
       tabBarIcon: (<Icon name='create' size={25} />),

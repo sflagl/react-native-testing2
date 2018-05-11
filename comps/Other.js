@@ -3,6 +3,8 @@ import { View, Button } from 'react-native';
 import { ARKit } from 'react-native-arkit';
 import {Grid, Row} from 'react-native-easy-grid'
 
+const ReadImageData = require('NativeModules').ReadImageData;
+
 const zPosition = -0.5
 
 export default class ReactNativeARKit extends Component {
@@ -14,6 +16,26 @@ export default class ReactNativeARKit extends Component {
     }
   }
 
+  takePicture = async function() {
+    const {use} = this.props
+    console.log('Clicked!')
+    if (use === 'upload') {
+      const data = await ARKit.snapshotCamera()
+      console.log(data.url);
+      ReadImageData.readImage(data.url, (imageBase64) => {
+        console.log(imageBase64);
+        });
+      this.props.addPics(data)
+    }else if(use === 'detection'){
+      const data = await ARKit.snapshotCamera()
+      console.log('Detecting...')
+      ReadImageData.readImage(data.url, (imageBase64) => {
+        console.log(imageBase64);
+        const objects = clarifai.predictContent('test-model', imageBase64)
+        });
+    }
+  };
+
   renderLikeAnythingPlease = () => {
     ARKit.focusScene()
     ARKit.getCamera().then(info => {
@@ -22,6 +44,10 @@ export default class ReactNativeARKit extends Component {
     const trueFalse = !this.state.showThatThing
     this.setState({showThatThing: trueFalse})
     console.log('Button clicked!')
+  }
+
+  componentDidMount = () => {
+    this.props.getFunc(this.takePicture.bind(this))
   }
 
   render() {

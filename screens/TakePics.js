@@ -7,6 +7,7 @@ import Camera from '../comps/Other'
 import PicsDisplay from '../comps/PicsDisplay'
 import ButtonOutline from '../comps/button-outline'
 import ButtonSolid from '../comps/button'
+import ARKit from 'react-native-arkit'
 // create a component
 class TakePics extends Component {
 
@@ -16,6 +17,7 @@ class TakePics extends Component {
             note: '',
             concept: '',
             pictures: [],
+            use: 'upload'
         };
     }
 
@@ -33,6 +35,11 @@ class TakePics extends Component {
         pictures.splice(picKey, 1);
         this.setState({pictures})
 
+    }
+
+    //lets user click button on this screen to take picture
+    lemmeGetThatFunc = (func) => {
+        this.setState({takePic: func})
     }
 
     goToWriteNoteScreen = () => {
@@ -55,7 +62,7 @@ class TakePics extends Component {
         return (
             <Grid style={styles.container}>
                 <Row size={60}>
-                    <Camera style={styles.camera} addPics={this.addPics} use="upload"/>
+                    <Camera style={styles.camera} addPics={this.addPics} use="upload" getFunc={this.lemmeGetThatFunc}/>
                 </Row>
                 <Row size={20}>
                     <PicsDisplay style={styles.PicsDisplay} pictures={this.state.pictures} deletePics={this.deletePics} />
@@ -64,7 +71,7 @@ class TakePics extends Component {
                 <Row styles={{alignItems: 'center'}} size={20}>
                     <Col>
                         <ButtonOutline press={this.goToWriteNoteScreen} title="Add Note"/>   
-                        <ButtonSolid title="Take Picture"/>  
+                        <ButtonSolid title="Take Picture" press={this.state.takePic}/>  
                     </Col>
                 </Row>
             </Grid>
