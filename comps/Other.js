@@ -14,17 +14,17 @@ export default class ReactNativeARKit extends Component {
     }
   }
 
+  renderLikeAnythingPlease = () => {
+    ARKit.focusScene()
+    ARKit.getCamera().then(info => {
+      console.log(info.eulerAngles)
+    })
+    const trueFalse = !this.state.showThatThing
+    this.setState({showThatThing: trueFalse})
+    console.log('Button clicked!')
+  }
+
   render() {
-    
-    renderLikeAnythingPlease = () => {
-      ARKit.focusScene()
-      ARKit.getCamera().then(info => {
-        console.log(info.eulerAngles)
-      })
-      const trueFalse = !this.state.showThatThing
-      this.setState({showThatThing: trueFalse})
-      console.log('Button clicked!')
-    }
 
     return (
       <Grid>
@@ -114,7 +114,7 @@ export default class ReactNativeARKit extends Component {
         </ARKit>
         </Row>
         <Row size={15}>
-        <Button title="Do something" onPress={renderLikeAnythingPlease}/>
+        <Button title="Do something" onPress={this.renderLikeAnythingPlease}/>
         </Row>
       </Grid>
     );

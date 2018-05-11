@@ -3,18 +3,16 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableHighlight, Alert } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid"
 // import Camera from '../Camera'
-import Camera from '../screens/Other'
-import PicsDisplay from '../PicsDisplay'
-import { Button } from 'react-native-elements'
-import {Redirect} from 'react-router-native'
-import WriteNote from './WriteNote'
+import Camera from '../comps/Other'
+import PicsDisplay from '../comps/PicsDisplay'
+import ButtonOutline from '../comps/button-outline'
+import ButtonSolid from '../comps/button'
 // create a component
 class TakePics extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
             note: '',
             concept: '',
             pictures: [],
@@ -49,14 +47,11 @@ class TakePics extends Component {
               ))
         }else{
             console.log('Going to screen...')
-            this.setState({redirect: true})
+            this.props.navigation.navigate('StartViewScreen')
         }
     }
 
     render() {
-        if(this.state.redirect){
-            return <WriteNote pictures={this.state.pictures}/>
-        }
         return (
             <Grid style={styles.container}>
                 <Row size={60}>
@@ -67,7 +62,10 @@ class TakePics extends Component {
                 </Row>
                 {/* <Text style={styles.button} title="Write Note">WRITE NOTE </Text> */}
                 <Row styles={{alignItems: 'center'}} size={20}>
-                    <Button buttonStyle={styles.button} title="Write Note" onPress={this.goToWriteNoteScreen}/>
+                    <Col>
+                        <ButtonOutline press={this.goToWriteNoteScreen} title="Add Note"/>   
+                        <ButtonSolid title="Take Picture"/>  
+                    </Col>
                 </Row>
             </Grid>
         );

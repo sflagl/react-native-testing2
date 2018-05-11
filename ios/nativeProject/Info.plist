@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>I&apos;m gonna add stuff to your pictures</string>
+	<string>I'm gonna add stuff to your pictures</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -50,6 +50,8 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -68,7 +70,7 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Let me track the shit out of you</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>I&apos;m creeping through your photos</string>
+	<string>I'm creeping through your photos</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
