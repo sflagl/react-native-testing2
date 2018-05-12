@@ -60,7 +60,7 @@ class StartView extends Component {
 
 render() {
   return (
-    <ARCamera use="detection" getFunc={(func) => {console.log('Detecting...')}}/>
+    <ARCamera use="detection" getFunc={(func) => {console.log('Detecting...')}} objects={this.props.screenProps.objects}/>
 
   );
 }

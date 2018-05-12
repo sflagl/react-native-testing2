@@ -25,20 +25,15 @@ export class AddNote extends Component {
     // clarifai.createImages(pictures, title, 'test-model')
     //add note and title to state
     const newObj = {
-      name: title,
-      note: note,
-      pictures: pictures
+      [title]: {
+        name: title,
+        note: note,
+        pictures: pictures
+      }
     }
 
     this.state.addObjectToNotes(newObj)
     //redirect to homepage
-
-    console.log('Submitted!')
-    console.log(title)
-    console.log(note[0])
-    console.log(note[1])
-    console.log(note[2])
-    
     this.props.navigation.navigate('StartViewScreen')
   }
 

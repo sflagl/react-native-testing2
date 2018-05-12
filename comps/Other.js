@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Button, TouchableWithoutFeedback } from 'react-native';
 import { ARKit } from 'react-native-arkit';
 import {Grid, Row} from 'react-native-easy-grid';
+import Note from './Note'
 import clarifai from '../utils/clarifai'
 
 const ReadImageData = require('NativeModules').ReadImageData;
@@ -12,18 +13,29 @@ export default class ReactNativeARKit extends Component {
 
   constructor(props) {
     super(props);
+    this.takePicture = this.takePicture.bind(this)
     this.state ={
       showThatThing: false,
       showNote: false,
-      noteObject: ''
+      noteObject: '',
+      errorMsg: '',
+      loading: false,
     }
   }
 
   showNote = (object) => {
-    if(concepts[0].value > 0.75){
-      this.setState({showNote: true, noteObject: concepts[0].name})
+    ARKit.focusScene()
+    console.log('Trying to show note...')
+    const match = object.concepts[0]
+    console.log(match)
+    if(match.value > 0.75){
+      console.log("There's a match!")
+      console.log(this.props)
+      const noteObj = this.props.objects[match.name]
+      console.log(noteObj)
+      this.setState({showNote: true, noteObject: noteObj, loading: false})
     }else{
-
+      this.setState({errorMsg: 'No notes found!', loading: false})
     }
   }
 
@@ -46,8 +58,10 @@ export default class ReactNativeARKit extends Component {
         this.props.addPics(data)
         });
     }else if(use === 'detection'){
+      const that = this
       const data = await ARKit.snapshotCamera()
       console.log('Detecting...')
+      console.log(data)
       ReadImageData.readImage(data.url, (imageBase64) => {
         //call clarifai
         clarifai.predictContent('test-model', imageBase64)
@@ -56,7 +70,7 @@ export default class ReactNativeARKit extends Component {
             function(response) {
               console.log('Predicting...')
               console.log(response.rawData.outputs[0].data)
-              return response.rawData.outputs[0].data
+              that.showNote(response.rawData.outputs[0].data)
             },
             function(err) {
               // there was an error
@@ -156,21 +170,7 @@ export default class ReactNativeARKit extends Component {
               position={{ x: 0.4, y: 0.4, z: zPosition }}
               shape={{ width: 0.1, height: 0.1 }}
             /> */}
-            {
-              this.state.showThatThing ? (
-                <ARKit.Text
-              text="ARKit is Cool!"
-              position={{ x: 0, y: 0, z: zPosition }}
-              font={{ size: 0.05, depth: 0.05 }}
-            />
-              ):(
-                <ARKit.Text
-              text="Fuck this!"
-              position={{ x: 0, y: 0, z: zPosition }}
-              font={{ size: 0.05, depth: 0.05 }}
-            />
-              )
-            }
+            {this.state.showNote && <Note object={this.state.noteObject}/>}
         </ARKit>
         </Row>
         <Row size={15}>

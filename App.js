@@ -54,7 +54,7 @@ export default class App extends Component {
   addObjectToNotes = (obj) => {
     const {objects} = this.state
     console.log('Added!')
-    const newObjects = [...objects, obj]
+    const newObjects = {...objects, ...obj}
     console.log(newObjects)
    
   }
