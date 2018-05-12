@@ -30,7 +30,7 @@ export default class ReactNativeARKit extends Component {
     console.log('Trying to show note...')
     const match = object.concepts[0]
     console.log(match)
-    if(match.value > 0.75){
+    if(match.value > 0.5){
       console.log("There's a match!")
       console.log(this.props)
       const noteObj = this.props.objects[match.name]
@@ -179,9 +179,9 @@ export default class ReactNativeARKit extends Component {
             {this.state.errorMsg && <Error />}
         </ARKit>
         </Row>
-        <Row size={15}>
+        {/* <Row size={15}>
         <Button title="Do something" onPress={this.renderLikeAnythingPlease}/>
-        </Row>
+        </Row> */}
       </Grid>
       </TouchableWithoutFeedback>
     );

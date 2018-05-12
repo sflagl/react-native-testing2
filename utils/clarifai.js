@@ -1,5 +1,6 @@
 import clarifai from 'clarifai'
 // import dotenv from 'dotenv'
+// const clarifai =require('clarifai')
 
 process.nextTick = setImmediate
 
@@ -7,6 +8,7 @@ process.nextTick = setImmediate
 // dotenv.config()
 
 //Don't show API key on github
+
 
 const clarifaiApp =  new Clarifai.App({
     apiKey: API_KEY
@@ -97,20 +99,27 @@ trainModel: function  (modelID) {
 },
 
 predictContent: function (modelID, img) {
-    clarifaiApp.models.predict(modelID, {base64: img}).then(
-        function(response) {
-            // do something with response
-            console.log('Predicting...')
-            console.log(response.rawData.outputs[0].data)
-            return response.rawData.outputs[0].data
-        },
-        function(err) {
-            // there was an error
-            console.log(err)
-            console.log('Fuck')
-            return "No notes detected"
-        }
-    );
+    // clarifaiApp.models.predict(modelID, {base64: img}).then(
+    //     function(response) {
+    //         // do something with response
+    //         console.log('Predicting...')
+    //         console.log(response.rawData.outputs[0].data)
+    //         return response.rawData.outputs[0].data
+    //     },
+    //     function(err) {
+    //         // there was an error
+    //         console.log(err)
+    //         console.log('Fuck')
+    //         return "No notes detected"
+    //     }
+    // );
+    console.log('Calling clarifai...')
+
+    return clarifaiApp.models.predict(modelID, {base64: img})
+},
+
+getImages: function () {
+    return clarifaiApp.inputs.list({page: 1, perPage: 50})
 },
 
 
@@ -133,5 +142,5 @@ export default Clari;
 //     }
 // )
 
-// createImages(oreosArr, 'oreos')
+// Clari.getImages()
 

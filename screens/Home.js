@@ -33,7 +33,9 @@ export class Home extends Component {
 
             <Col>
               <Row>
+                <View style={{padding: 10, fontWeight: '100', flex:1,justifyContent: "center",alignItems: "center"}}>
                 <Text style={{ fontSize: 40, padding: 10, fontWeight: '100', flex:1,justifyContent: "center",alignItems: "center" }}>NoteWorthy</Text>
+                </View>
               </Row>
 
               <Row >

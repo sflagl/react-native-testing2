@@ -88,7 +88,7 @@ export class GalleryOpen extends Component {
                 </Row>
                 <Row size={1}>
                     <Col>
-                        <ButtonOutline press={() => this.props.navigation.navigate('EditNoteScreen')} title="Submit" />
+                        {/* <ButtonOutline press={() => this.props.navigation.navigate('EditNoteScreen')} title="Submit" /> */}
                         <ButtonSolid press={() => this.props.navigation.navigate('StartViewScreen')} title="Home" />
                     </Col>
 
