@@ -13,12 +13,13 @@ export class GalleryCard extends Component {
 
   render() {
     console.log(this.props)
+    console.log(this.props.object.pictures[1])
     return (
      
      
         <Card style={{paddingBottom: 5}}>
           <CardItem>
-            <Image source={require('../images/bear.jpg')} style={{height: 180, width: null, flex: 1}}/>
+            <Image source={{uri: this.props.object.pictures[1]}} style={{height: 180, width: null, flex: 1}}/>
           </CardItem>
           <CardItem style={{marginTop: -5,marginBottom: -5 }}>
             <Left>
