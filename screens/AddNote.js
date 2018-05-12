@@ -24,11 +24,14 @@ export class AddNote extends Component {
     //send pics to clarify
     // clarifai.createImages(pictures, title, 'test-model')
     //add note and title to state
+    normalPics = pictures.map(item => {
+      return item.url
+    })
     const newObj = {
       [title]: {
         name: title,
         note: note,
-        pictures: pictures
+        pictures: normalPics
       }
     }
 

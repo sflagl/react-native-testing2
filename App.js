@@ -57,16 +57,19 @@ export default class App extends Component {
     console.log('Added!')
     const newObjects = {...objects, ...obj}
     console.log(newObjects)
-   
+    this.setState({objects: newObjects})
   }
 
   addPicturesToNotes = (obj) => {
     this.setState({objects: obj, downloadedPics: true})
   }
 
+ 
+
   render() {
+    const stateClone = Object.assign({}, this.state)
     return (
-      <AppNavigator screenProps={{addObjectToNotes: this.addObjectToNotes, addPicturesToNotes: this.addPicturesToNotes, ...this.state}}/>
+      <AppNavigator screenProps={{addObjectToNotes: this.addObjectToNotes, addPicturesToNotes: this.addPicturesToNotes, ...stateClone}}/>
     );
   }
 }
