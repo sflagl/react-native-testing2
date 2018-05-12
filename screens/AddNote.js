@@ -22,7 +22,7 @@ export class AddNote extends Component {
   submitNote = () => {
     const {note, title, pictures} = this.state
     //send pics to clarify
-    // clarifai.createImages(pictures, title, 'test-model')
+    clarifai.createImages(pictures, title, 'test-model')
     //add note and title to state
     normalPics = pictures.map(item => {
       return item.url
