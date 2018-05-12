@@ -8,9 +8,9 @@ export class ButtonSolid extends Component {
       return (
 
 
-      <Button onPress={this.props.press} style={{ margin: 10 }} block rounded success>
-       <Text style={{color:'white'}}> {this.props.title} </Text>
-      </Button>
+        <Button onPress={this.props.press} style={{ margin: 10, backgroundColor: '#A63A9F' }} block rounded success>
+        <Text style={{color:'white'}}> {this.props.title} </Text>
+       </Button>
 
         
 

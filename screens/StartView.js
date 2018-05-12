@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Title, List, ListItem } from 'native-base';
 import ButtonOutline from '../comps/button-outline';
 
 import Icon from 'react-native-ionicons';
@@ -158,11 +158,25 @@ class AddNoteInstructions extends Component {
       <Grid>
       
    
-        <Row size={3} style={{backgroundColor:'grey', padding:5}}>
-          <Text>To add a note, please take at least 5 pictures of the object, preferably from different angles</Text>
+        <Row size={3}>
+        <List>
+            <ListItem itemDivider>
+              <Text style={{ fontSize: 30, fontWeight:'100',textAlign: 'center'}}>Note:</Text>
+            </ListItem>
+
+              <ListItem>
+                <Text style={{ fontWeight: '100', fontSize: 20, }}>1. Click "Take Picture" of the item you want to take notes on. </Text>
+              </ListItem>
+              <ListItem>
+                <Text style={{ fontWeight: '100', fontSize: 20, }}>2. Or click "Add Note" to provide a gallery title and notes. </Text>
+              </ListItem>
+              <ListItem>
+                <Text style={{ fontWeight: '100', fontSize: 20, }}>3. Click Submit, on the next page once you have completed you notes. </Text>
+              </ListItem>
+            </List>
       
         </Row>
-        <Row>
+        <Row size={1}>
         <Col>
               <ButtonSolid press={() => this.props.navigation.navigate('TakePicsScreen')} title="Got it!"/>    
             </Col>
@@ -180,7 +194,7 @@ export default TabNavigator({
   GalleryTest: { 
     screen: GalleryTest,
     navigationOptions: {
-      tabBarLabel: (<Text style={{fontSize: 10, paddingBottom:5 }}>Gallery</Text>),
+      tabBarLabel: (<Text style={{fontSize: 10, paddingBottom:5 }}>Albums</Text>),
       tabBarIcon: (<Icon name='images' size={25} />),
     }, 
    },

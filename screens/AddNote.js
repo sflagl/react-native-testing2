@@ -61,13 +61,13 @@ export class AddNote extends Component {
             </Item>
             <Text style={{marginBottom:10, paddingLeft:10}}> Note </Text>
             <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
-              <Input placeholder="Line 1" onChangeText={(text) => this.changeNote(0, text)} value={this.state.note[0]}/>
+              <Input onChangeText={(text) => this.changeNote(0, text)} value={this.state.note[0]}/>
             </Item>
             <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
-              <Input placeholder="Line 2" onChangeText={(text) => this.changeNote(1, text)} value={this.state.note[1]}/>
+              <Input onChangeText={(text) => this.changeNote(1, text)} value={this.state.note[1]}/>
             </Item>
             <Item rounded style={{marginBottom:10, paddingLeft:10, backgroundColor: 'rgba(211, 211, 211, .4)'}}>
-              <Input placeholder="Line 3" onChangeText={(text) => this.changeNote(2, text)} value={this.state.note[2]}/>
+              <Input onChangeText={(text) => this.changeNote(2, text)} value={this.state.note[2]}/>
             </Item>
           </Form>
         </Row>
