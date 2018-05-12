@@ -1,7 +1,7 @@
 export default notes = {
-    "Water Botte" : {
-        name: "Water Botte",
-        note: [],
+    "Water botte" : {
+        name: "Water botte",
+        note: ['Accidentally mispelled "Bottle"', "", ""],
         pictures: []
     }, 
     "Almond butter" : {

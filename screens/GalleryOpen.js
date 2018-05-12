@@ -26,7 +26,8 @@ export class GalleryOpen extends Component {
                     
                     source: "https://images.unsplash.com/photo-1516073762189-e915e8248a2d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c88660471b22d3c3b70faef2d57189d&auto=format&fit=crop&w=700&q=60"
                 }
-            ]
+            ],
+            object: this.props.navigation.state.params.obj
         }
     }
 
@@ -42,14 +43,15 @@ export class GalleryOpen extends Component {
         return (
             <View>
 
-                <Image style={{ height: 300, width: '100%' }} source={{ uri: item.source }} />
+                <Image style={{ height: 300, width: '100%' }} source={{ uri: item}} />
                
             </View>
         );
     }
 
     render() {
-
+        console.log('Rendering')
+        console.log(this.props.navigation.state.params.obj)
         return (
 
             <Grid>
@@ -65,8 +67,8 @@ export class GalleryOpen extends Component {
                                 inactiveSlideScale={0.65}
                                 firstItem={1}
                                 sliderWidth={width}
-                                itemWidth={width / 1.75}
-                                data={this.state.entries}
+                                itemWidth={width / 1.5}
+                                data={this.state.object.pictures}
                                 renderItem={this._renderItem}
                                 containerCustomStyle={{ overflow: 'visible' }}
                                 contentContainerCustomStyle={{ overflow: 'visible' }}
@@ -75,10 +77,14 @@ export class GalleryOpen extends Component {
                         </View>
                     </View>
                 </Row>
-                <Row size={1}>
-                <Text style={{ paddingTop:20,paddingLeft:20,paddingRight:20, paddingBottom:10,}}>1. Test</Text>
-                <Text style={{ paddingTop:20,paddingLeft:20,paddingRight:20, paddingBottom:10,}}>1. Test</Text>
-                <Text style={{ paddingTop:20,paddingLeft:20,paddingRight:20, paddingBottom:10,}}>1. Test</Text>
+                <Row size={.3}>
+                    <Text style={{ paddingTop:20,paddingLeft:20,paddingRight:20, paddingBottom:10,}}>{this.state.object.note[0]}</Text>
+                </Row>
+                <Row size={.3}>
+                    <Text style={{ paddingTop:10 ,paddingLeft:20,paddingRight:20, paddingBottom:5,}}>{this.state.object.note[1]}</Text>
+                </Row>
+                <Row size={.3}>
+                    <Text style={{ paddingTop:0 ,paddingLeft:20,paddingRight:20, paddingBottom:20,}}>{this.state.object.note[2]}</Text>
                 </Row>
                 <Row size={1}>
                     <Col>

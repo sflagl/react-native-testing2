@@ -6,7 +6,13 @@ import Icon from 'react-native-ionicons';
 
 
 export class GalleryCard extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
   render() {
+    console.log(this.props)
     return (
      
      
@@ -18,7 +24,7 @@ export class GalleryCard extends Component {
             <Left>
               <Body >
                 <Button transparent>
-                <Text>NativeBase</Text>
+                <Text>{this.props.object.name}</Text>
                 </Button>
               </Body>
             </Left>

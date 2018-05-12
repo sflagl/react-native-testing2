@@ -47,7 +47,8 @@ export default class App extends Component {
     super(props);
     this.state={
       test: "Just seeing if this shit works", 
-      objects: data
+      objects: data,
+      downloadedPics: false
     }
   }
 
@@ -59,9 +60,13 @@ export default class App extends Component {
    
   }
 
+  addPicturesToNotes = (obj) => {
+    this.setState({objects: obj, downloadedPics: true})
+  }
+
   render() {
     return (
-      <AppNavigator screenProps={{addObjectToNotes: this.addObjectToNotes, ...this.state}}/>
+      <AppNavigator screenProps={{addObjectToNotes: this.addObjectToNotes, addPicturesToNotes: this.addPicturesToNotes, ...this.state}}/>
     );
   }
 }

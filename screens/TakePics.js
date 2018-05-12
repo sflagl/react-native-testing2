@@ -43,7 +43,7 @@ class TakePics extends Component {
     }
 
     goToWriteNoteScreen = () => {
-        if(this.state.pictures.length < -1){
+        if(this.state.pictures.length < 4){
             return (Alert.alert(
                 'More Pictures Needed!',
                 'You need to take at least 5 pictures before you can write a note',

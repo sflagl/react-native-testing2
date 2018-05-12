@@ -21,6 +21,8 @@ import Add from '../screens/AddNote'
 import ARCamera from '../comps/Other'
 import Camera from '../comps/ARKitCamera'
 
+import clarifai from '../utils/clarifai'
+
 // const provideIsFocused = Comp => {
 //   class IsFocusedProvider extends React.Component {
 //     state = {
@@ -77,23 +79,61 @@ class GalleryTest extends Component {
     }
   };
 
-  render() {
+  componentDidMount = () => {
+    if(!this.props.screenProps.downloadedPics){
+      const that = this
+      clarifai.getImages()
+      .then(
+        function(response) {
+          console.log(response.rawData)
+          that.showPictures(response.rawData)
+        },
+        function(err) {
+          console.log('Oh no!')
+        }
+      );
+    }
+  }
 
+  showPictures = (imgArray) => {
+    console.log('Running...')
+    const {objects} = this.props.screenProps
+    for (object in objects){
+      imgArray.forEach(img => {
+        if (img.id.includes(object)){
+          console.log(img.id)
+          console.log(object)
+          objects[object].pictures.push(img.data.image.url)
+        }
+      })
+    };
+    this.props.screenProps.addPicturesToNotes(objects)
+  }
+
+  returnGalleryCards = (objects) => {
+    
+    const components = []
+    for (object in objects){
+      console.log(object)
+      const obj = objects[object]
+      components.push(
+        <Row>
+          <GalleryCard press={() => this.props.navigation.navigate('GalleryOpenScreen', {obj: obj})} object={obj} />   
+        </Row>
+      )
+    }
+
+    return components
+  }
+
+  render() {
+    const {objects} = this.props.screenProps
+    console.log('Making cards')
+    console.log(objects)
     return (
       <ScrollView>
       <Grid>
-       
-     
-        <Row>
-          <GalleryCard press={() => this.props.navigation.navigate('GalleryOpenScreen')} />   
-        </Row>
-        <Row>
-          <GalleryCard press={() => this.props.navigation.navigate('GalleryOpenScreen')} />   
-        </Row>
-        <Row>
-          <GalleryCard press={() => this.props.navigation.navigate('GalleryOpenScreen')} />   
-        </Row>
-        
+        {this.returnGalleryCards(objects)}
     </Grid>
     </ScrollView>
     );

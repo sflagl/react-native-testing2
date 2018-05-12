@@ -4,6 +4,8 @@ import { ARKit } from 'react-native-arkit';
 import {Grid, Row} from 'react-native-easy-grid';
 import Note from './Note'
 import clarifai from '../utils/clarifai'
+import Loading from './Loading';
+import Error from './Error'
 
 const ReadImageData = require('NativeModules').ReadImageData;
 
@@ -17,14 +19,14 @@ export default class ReactNativeARKit extends Component {
     this.state ={
       showThatThing: false,
       showNote: false,
-      noteObject: '',
+      noteObject: null,
       errorMsg: '',
       loading: false,
     }
   }
 
   showNote = (object) => {
-    ARKit.focusScene()
+    // ARKit.focusScene()
     console.log('Trying to show note...')
     const match = object.concepts[0]
     console.log(match)
@@ -47,6 +49,8 @@ export default class ReactNativeARKit extends Component {
   }
 
   takePicture = async function() {
+    ARKit.focusScene()
+    this.setState({loading: true, showNote: false, noteObj: null, errorMsg: ''})
     const {use} = this.props
     console.log('Clicked!')
     if (use === 'upload') {
@@ -171,6 +175,8 @@ export default class ReactNativeARKit extends Component {
               shape={{ width: 0.1, height: 0.1 }}
             /> */}
             {this.state.showNote && <Note object={this.state.noteObject}/>}
+            {this.state.loading && <Loading /> }
+            {this.state.errorMsg && <Error />}
         </ARKit>
         </Row>
         <Row size={15}>
